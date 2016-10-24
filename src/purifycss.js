@@ -74,8 +74,13 @@ var purify = function (searchThrough, css, options, callback) {
     PrintUtil.printRejected(selectorFilter.rejectedSelectors);
   }
 
+  var result = {
+    source: source,
+    rejected: selectorFilter.rejectedSelectors
+  };
+
   if (!options.output) {
-    return callback ? callback(source) : source;
+    return callback ? callback(result) : result;
   } else {
     fs.writeFile(options.output, source, function (err) {
       if (err) {
